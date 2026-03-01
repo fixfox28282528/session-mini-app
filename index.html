@@ -5,151 +5,262 @@
     <title>Session ID — пример</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <style>
         :root {
-            --page-max-width: 640px;
+            --page-max-width: 480px;
+            --accent: #00d4aa;
+            --accent-dim: rgba(0, 212, 170, 0.15);
+            --radius: 16px;
+            --radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                sans-serif;
-            background-color: var(--tg-theme-bg-color, #0b0c10);
-            color: var(--tg-theme-text-color, #ffffff);
+            font-family: "Manrope", system-ui, sans-serif;
+            background: var(--tg-theme-bg-color, #0d1117);
+            color: var(--tg-theme-text-color, #e6edf3);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         .app {
             max-width: var(--page-max-width);
             margin: 0 auto;
-            padding: 16px 14px 24px;
-            box-sizing: border-box;
+            padding: 20px 18px 32px;
         }
 
-        h1 {
-            font-size: 1.4rem;
-            margin: 0 0 12px;
+        .hero {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .hero-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 14px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00a88a 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .hero h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            color: var(--tg-theme-hint-color, #8b949e);
+            margin: 0;
         }
 
         h2 {
-            font-size: 1.1rem;
-            margin: 18px 0 10px;
-        }
-
-        p {
-            margin: 0 0 10px;
-            line-height: 1.5;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--tg-theme-hint-color, #8b949e);
+            margin: 0 0 12px;
         }
 
         .section {
-            margin-bottom: 18px;
+            margin-bottom: 24px;
         }
 
         .card {
-            border-radius: 14px;
-            padding: 14px 12px;
-            background-color: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.04));
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            background: var(--tg-theme-secondary-bg-color, rgba(22, 27, 34, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .session-id-box {
-            font-family: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
-            font-size: 0.78rem;
-            line-height: 1.5;
-            padding: 10px 10px;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: 1px dashed rgba(255, 255, 255, 0.14);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.7;
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(0, 212, 170, 0.2);
             word-break: break-word;
             white-space: pre-wrap;
+            color: var(--accent);
+            letter-spacing: 0.02em;
         }
 
         .hint {
-            font-size: 0.78rem;
-            color: var(--tg-theme-hint-color, #a0a0a0);
+            font-size: 0.85rem;
+            color: var(--tg-theme-hint-color, #8b949e);
+            line-height: 1.55;
+        }
+
+        .instruction-card {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 16px 18px;
+            border-radius: var(--radius);
+            background: var(--tg-theme-secondary-bg-color, rgba(22, 27, 34, 0.6));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .instruction-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .instruction-card p {
+            margin: 0;
+            font-size: 0.9rem;
         }
 
         .downloads-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 10px;
+            gap: 12px;
         }
 
-        @media (min-width: 480px) {
+        @media (min-width: 360px) {
             .downloads-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
         .download-card {
-            border-radius: 14px;
-            padding: 12px 12px;
-            background-color: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.04));
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            background: var(--tg-theme-secondary-bg-color, rgba(22, 27, 34, 0.8));
             border: 1px solid rgba(255, 255, 255, 0.06);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .download-card:active {
+            transform: scale(0.98);
+        }
+
+        .download-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .download-card:nth-child(1) .download-icon {
+            background: rgba(61, 220, 132, 0.15);
+        }
+
+        .download-card:nth-child(2) .download-icon {
+            background: rgba(163, 163, 163, 0.2);
         }
 
         .download-card-title {
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.98rem;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
         }
 
         .download-card a {
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            margin-top: 6px;
-            padding: 9px 10px;
-            border-radius: 999px;
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            text-align: center;
-            background-color: var(--tg-theme-button-color, #34a853);
-            color: var(--tg-theme-button-text-color, #ffffff);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            border: none;
+            background: var(--tg-theme-button-color, var(--accent));
+            color: var(--tg-theme-button-text-color, #0d1117);
+            transition: opacity 0.2s;
+        }
+
+        .download-card a:active {
+            opacity: 0.9;
         }
 
         .warning {
-            border-radius: 14px;
-            padding: 12px 12px;
-            margin-top: 6px;
-            background-color: rgba(255, 224, 130, 0.96); /* жёлтый фон */
-            border: 2px solid rgba(255, 179, 0, 1); /* жёлтая рамка */
-            color: #3b2b00;
+            border-radius: var(--radius);
+            padding: 18px 18px;
+            background: linear-gradient(135deg, rgba(255, 212, 0, 0.18) 0%, rgba(255, 179, 0, 0.12) 100%);
+            border: 1px solid rgba(255, 179, 0, 0.5);
+            color: #e6c547;
+        }
+
+        .warning p {
+            margin: 0 0 8px;
             font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .warning p:last-child {
+            margin-bottom: 0;
         }
 
         .warning a {
-            color: #1a0dab;
+            color: #7dd3fc;
             font-weight: 600;
+            text-decoration: none;
+        }
+
+        .warning a:hover {
             text-decoration: underline;
         }
 
         footer {
-            margin-top: 18px;
-            font-size: 0.78rem;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.8rem;
             text-align: center;
-            color: var(--tg-theme-hint-color, #a0a0a0);
+            color: var(--tg-theme-hint-color, #6e7681);
         }
     </style>
 </head>
 <body>
 <div class="app">
+    <header class="hero">
+        <div class="hero-icon">🔑</div>
+        <h1>Session ID</h1>
+        <p>Пример идентификатора и ссылки на приложение</p>
+    </header>
+
     <section class="section card">
-        <h1>Ваш Session ID (пример)</h1>
-        <p>
+        <h2>Пример ID</h2>
+        <p class="hint" style="margin-bottom: 14px;">
             Ниже показан <strong>пример</strong> Session ID — это не ваш реальный идентификатор.
-            Он нужен только для наглядности формата.
         </p>
         <div class="session-id-box">
 05a8 c2b6 f1e9 d3c7
@@ -157,49 +268,45 @@ a4b8 f0e2 d9c1 a5b7
 c3f6 e8d0 a2b4 c6e8
 f0d2 a4c6 e8f0 a2b4
         </div>
-        <p class="hint" style="margin-top: 10px;">
-            Формат: длинная строка в шестнадцатеричном (hex) виде, обычно
-            разделённая на удобочитаемые блоки.
+        <p class="hint" style="margin-top: 12px;">
+            Формат: hex-строка, разделённая на блоки для удобства чтения.
         </p>
     </section>
 
     <section class="section">
-        <h2>Как найти свой реальный Session ID</h2>
-        <p class="hint">
-            🔍 <strong>Как найти свой реальный Session ID:</strong>
-            Откройте приложение Session → нажмите на аватарку (или иконку меню) →
-            ваш ID указан вверху экрана. Скопируйте его.
-        </p>
+        <h2>Как найти свой ID</h2>
+        <div class="instruction-card">
+            <div class="instruction-icon">🔍</div>
+            <p style="color: var(--tg-theme-text-color, #e6edf3);">
+                Откройте приложение Session → нажмите на аватарку (или иконку меню) → ваш ID указан вверху экрана. Скопируйте его.
+            </p>
+        </div>
     </section>
 
     <section class="section">
-        <h2>Скачать приложение Session</h2>
+        <h2>Скачать приложение</h2>
         <div class="downloads-grid">
             <div class="download-card">
-                <div class="download-card-title">
-                    <span>🤖</span>
-                    <span>Скачать для Android</span>
-                </div>
+                <div class="download-icon">🤖</div>
+                <div class="download-card-title">Android</div>
                 <a
                     href="https://play.google.com/store/apps/details?id=network.loki.messenger"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Открыть в Google Play
+                    Google Play
                 </a>
             </div>
 
             <div class="download-card">
-                <div class="download-card-title">
-                    <span>🍏</span>
-                    <span>Скачать для iPhone</span>
-                </div>
+                <div class="download-icon">🍏</div>
+                <div class="download-card-title">iPhone</div>
                 <a
                     href="https://apps.apple.com/app/session-private-messenger/id1470168868"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Открыть в App Store
+                    App Store
                 </a>
             </div>
         </div>
@@ -210,19 +317,16 @@ f0d2 a4c6 e8f0 a2b4
             <p>
                 <strong>⚠️ Важно для пользователей из РФ:</strong>
                 Приложение Session заблокировано на территории России.
-                Для отправки сообщений и стабильной работы
-                <strong>необходимо использовать VPN или Tor</strong>.
-                Без этого приложение может не отправлять сообщения.
+                Для стабильной работы <strong>необходимо использовать VPN или Tor</strong>.
             </p>
-            <p style="margin-top: 6px;">
-                Подробности: <a href="https://getsession.org/blog/regional-connectivity" target="_blank" rel="noopener noreferrer">Официальная инструкция</a>
+            <p>
+                <a href="https://getsession.org/blog/regional-connectivity" target="_blank" rel="noopener noreferrer">Официальная инструкция →</a>
             </p>
         </div>
     </section>
 
     <footer>
         Этот инструмент создан для бота @your_bot_username
-        (замените на реальное имя бота).
     </footer>
 </div>
 
