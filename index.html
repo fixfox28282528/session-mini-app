@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Session ID — пример</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+        :root {
+            --page-max-width: 640px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background-color: var(--tg-theme-bg-color, #0b0c10);
+            color: var(--tg-theme-text-color, #ffffff);
+        }
+
+        .app {
+            max-width: var(--page-max-width);
+            margin: 0 auto;
+            padding: 16px 14px 24px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            margin: 0 0 12px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 18px 0 10px;
+        }
+
+        p {
+            margin: 0 0 10px;
+            line-height: 1.5;
+        }
+
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .card {
+            border-radius: 14px;
+            padding: 14px 12px;
+            background-color: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.04));
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .session-id-box {
+            font-family: "SF Mono", "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            padding: 10px 10px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px dashed rgba(255, 255, 255, 0.14);
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .hint {
+            font-size: 0.78rem;
+            color: var(--tg-theme-hint-color, #a0a0a0);
+        }
+
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 480px) {
+            .downloads-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .download-card {
+            border-radius: 14px;
+            padding: 12px 12px;
+            background-color: var(--tg-theme-secondary-bg-color, rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .download-card-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.98rem;
+        }
+
+        .download-card a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 6px;
+            padding: 9px 10px;
+            border-radius: 999px;
+            text-decoration: none;
+            text-align: center;
+            background-color: var(--tg-theme-button-color, #34a853);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: none;
+        }
+
+        .warning {
+            border-radius: 14px;
+            padding: 12px 12px;
+            margin-top: 6px;
+            background-color: rgba(255, 224, 130, 0.96); /* жёлтый фон */
+            border: 2px solid rgba(255, 179, 0, 1); /* жёлтая рамка */
+            color: #3b2b00;
+            font-size: 0.9rem;
+        }
+
+        .warning a {
+            color: #1a0dab;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 18px;
+            font-size: 0.78rem;
+            text-align: center;
+            color: var(--tg-theme-hint-color, #a0a0a0);
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <section class="section card">
+        <h1>Ваш Session ID (пример)</h1>
+        <p>
+            Ниже показан <strong>пример</strong> Session ID — это не ваш реальный идентификатор.
+            Он нужен только для наглядности формата.
+        </p>
+        <div class="session-id-box">
+05a8 c2b6 f1e9 d3c7
+a4b8 f0e2 d9c1 a5b7
+c3f6 e8d0 a2b4 c6e8
+f0d2 a4c6 e8f0 a2b4
+        </div>
+        <p class="hint" style="margin-top: 10px;">
+            Формат: длинная строка в шестнадцатеричном (hex) виде, обычно
+            разделённая на удобочитаемые блоки.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Как найти свой реальный Session ID</h2>
+        <p class="hint">
+            🔍 <strong>Как найти свой реальный Session ID:</strong>
+            Откройте приложение Session → нажмите на аватарку (или иконку меню) →
+            ваш ID указан вверху экрана. Скопируйте его.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Скачать приложение Session</h2>
+        <div class="downloads-grid">
+            <div class="download-card">
+                <div class="download-card-title">
+                    <span>🤖</span>
+                    <span>Скачать для Android</span>
+                </div>
+                <a
+                    href="https://play.google.com/store/apps/details?id=network.loki.messenger"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Открыть в Google Play
+                </a>
+            </div>
+
+            <div class="download-card">
+                <div class="download-card-title">
+                    <span>🍏</span>
+                    <span>Скачать для iPhone</span>
+                </div>
+                <a
+                    href="https://apps.apple.com/app/session-private-messenger/id1470168868"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Открыть в App Store
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="warning">
+            <p>
+                <strong>⚠️ Важно для пользователей из РФ:</strong>
+                Приложение Session заблокировано на территории России.
+                Для отправки сообщений и стабильной работы
+                <strong>необходимо использовать VPN или Tor</strong>.
+                Без этого приложение может не отправлять сообщения.
+            </p>
+            <p style="margin-top: 6px;">
+                Подробности: <a href="https://getsession.org/blog/regional-connectivity" target="_blank" rel="noopener noreferrer">Официальная инструкция</a>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        Этот инструмент создан для бота @your_bot_username
+        (замените на реальное имя бота).
+    </footer>
+</div>
+
+<script>
+    (function () {
+        if (window.Telegram && window.Telegram.WebApp) {
+            const tg = window.Telegram.WebApp;
+            tg.ready();
+            tg.expand();
+        }
+    })();
+</script>
+</body>
+</html>
+
